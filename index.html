@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Power BI Dashboard</title>
   <style>
+    :root {
+      /* Tweak these two to taste */
+      --zoom: 0.6;            /* report zoom level */
+      --buffer: 32px;         /* space above the report */
+      --bg: #1f2c44;          /* page background (contrast frame) */
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -14,32 +21,32 @@
     html, body {
       height: 100%;
       overflow: hidden;
-      background: #f4f5f7;
+      background: var(--bg);
     }
 
-    /* Full-screen viewport that clips the scaled iframe */
+    /* Report area: full width, sits below the top buffer */
     .report-container {
       position: fixed;
-      top: 0;
+      top: var(--buffer);
       left: 0;
       width: 100vw;
-      height: 100vh;
+      height: calc(100vh - var(--buffer));
       overflow: hidden;
     }
 
     /*
-      Zoom to 60%: the iframe is rendered at 1/0.6 = 166.667% of the
-      viewport, then scaled down to 0.6 so it fills the screen exactly
-      while showing the report content at 60% size.
+      Zoom: the iframe is rendered larger (100% / zoom) and then scaled
+      down so the report content displays at the chosen zoom level while
+      still filling the available area.
     */
     .report-container iframe {
       position: absolute;
       top: 0;
       left: 0;
-      width: 166.667%;
-      height: 166.667%;
+      width: calc(100% / var(--zoom));
+      height: calc(100% / var(--zoom));
       border: none;
-      transform: scale(0.6);
+      transform: scale(var(--zoom));
       transform-origin: top left;
     }
   </style>
