@@ -13,55 +13,44 @@
 
     html, body {
       height: 100%;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      overflow: hidden;
       background: #f4f5f7;
     }
 
-    .page {
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-    }
-
-    header {
-      background: #1f2937;
-      color: #fff;
-      padding: 14px 24px;
-      flex: 0 0 auto;
-    }
-
-    header h1 {
-      font-size: 18px;
-      font-weight: 600;
-    }
-
+    /* Full-screen viewport that clips the scaled iframe */
     .report-container {
-      flex: 1 1 auto;
-      position: relative;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
     }
 
+    /*
+      Zoom to 60%: the iframe is rendered at 1/0.6 = 166.667% of the
+      viewport, then scaled down to 0.6 so it fills the screen exactly
+      while showing the report content at 60% size.
+    */
     .report-container iframe {
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      width: 166.667%;
+      height: 166.667%;
       border: none;
+      transform: scale(0.6);
+      transform-origin: top left;
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <header>
-      <h1>Dashboard</h1>
-    </header>
-    <div class="report-container">
-      <iframe
-        title="Power BI Report"
-        src="https://app.powerbi.com/view?r=eyJrIjoiMGE2NWE1M2UtODJkNi00MTNiLTkxMjktODBiNzY2Zjg2MmIxIiwidCI6IjlmZDc1ODBhLTY0NzItNGQ5Yy1hMTQyLWQxMzFkM2E3YTExNiIsImMiOjN9"
-        allowfullscreen="true">
-      </iframe>
-    </div>
+  <div class="report-container">
+    <iframe
+      title="Power BI Report"
+      src="https://app.powerbi.com/view?r=eyJrIjoiMGE2NWE1M2UtODJkNi00MTNiLTkxMjktODBiNzY2Zjg2MmIxIiwidCI6IjlmZDc1ODBhLTY0NzItNGQ5Yy1hMTQyLWQxMzFkM2E3YTExNiIsImMiOjN9"
+      allowfullscreen="true">
+    </iframe>
   </div>
 </body>
 </html>
