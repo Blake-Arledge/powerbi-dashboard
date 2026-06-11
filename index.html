@@ -7,8 +7,7 @@
   <style>
     :root {
       /* Tweak these to taste */
-      --frame: 32px;          /* consistent border around banner + report */
-      --banner-height: 150px; /* banner height (smaller = less vertical space) */
+      --frame: 32px;          /* border around the report */
       --buffer-bottom: 0px;   /* space below the report */
       --bg: #1f2c44;          /* page background (frame color) */
 
@@ -39,24 +38,8 @@
       background: var(--bg);
     }
 
-    /* Banner header: framed 32px on top and sides, height-capped, centered */
-    .site-header {
-      flex: 0 0 auto;
-      line-height: 0;
-      padding: var(--frame) var(--frame) 0;
-      text-align: center;
-    }
-
-    .site-header img {
-      display: inline-block;
-      height: var(--banner-height);
-      width: auto;
-      max-width: 100%;
-      border-radius: 8px;
-    }
-
     /*
-      Report area: fills the remaining height and scrolls vertically.
+      Report area: fills the height and scrolls vertically.
       The iframe spans the full width; its height follows the canvas
       aspect ratio, so the report is "fit to width" and any overflow
       scrolls instead of being squeezed to fit on screen.
@@ -80,9 +63,6 @@
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <img src="twt-banner.png" alt="Texas Water Trends Dashboard" />
-  </header>
   <div class="report-container">
     <iframe
       title="Texas Water Trends"
