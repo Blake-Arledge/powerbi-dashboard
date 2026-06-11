@@ -8,7 +8,9 @@
     :root {
       /* Tweak these to taste */
       --zoom: 0.6;            /* report zoom level */
-      --buffer: 32px;         /* even space around the report on all sides */
+      --buffer-top: 32px;     /* space above the report */
+      --buffer-side: 200px;   /* space on left and right */
+      --buffer-bottom: 0px;   /* space below the report */
       --bg: #1f2c44;          /* page background (contrast frame) */
     }
 
@@ -24,15 +26,16 @@
       background: var(--bg);
     }
 
-    /* Report area: inset evenly on all four sides */
+    /* Report area: wide side frames, top buffer, flush to bottom */
     .report-container {
       position: fixed;
-      top: var(--buffer);
-      left: var(--buffer);
-      width: calc(100vw - 2 * var(--buffer));
-      height: calc(100vh - 2 * var(--buffer));
+      top: var(--buffer-top);
+      left: var(--buffer-side);
+      width: calc(100vw - 2 * var(--buffer-side));
+      height: calc(100vh - var(--buffer-top) - var(--buffer-bottom));
       overflow: hidden;
-      border-radius: 8px;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
     }
 
     /*
