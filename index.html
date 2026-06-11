@@ -6,9 +6,9 @@
   <title>Power BI Dashboard</title>
   <style>
     :root {
-      /* Tweak these two to taste */
+      /* Tweak these to taste */
       --zoom: 0.6;            /* report zoom level */
-      --buffer: 32px;         /* space above the report */
+      --buffer: 32px;         /* even space around the report on all sides */
       --bg: #1f2c44;          /* page background (contrast frame) */
     }
 
@@ -24,14 +24,15 @@
       background: var(--bg);
     }
 
-    /* Report area: full width, sits below the top buffer */
+    /* Report area: inset evenly on all four sides */
     .report-container {
       position: fixed;
       top: var(--buffer);
-      left: 0;
-      width: 100vw;
-      height: calc(100vh - var(--buffer));
+      left: var(--buffer);
+      width: calc(100vw - 2 * var(--buffer));
+      height: calc(100vh - 2 * var(--buffer));
       overflow: hidden;
+      border-radius: 8px;
     }
 
     /*
