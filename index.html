@@ -9,6 +9,7 @@
       /* Tweak these to taste */
       --zoom: 0.6;            /* report zoom level (1 = fit to page) */
       --frame: 32px;          /* consistent border around banner + report */
+      --banner-height: 150px; /* banner height (smaller = less vertical space) */
       --buffer-bottom: 0px;   /* space below the report */
       --bg: #1f2c44;          /* page background (frame color) */
     }
@@ -31,17 +32,19 @@
       background: var(--bg);
     }
 
-    /* Banner header: framed 32px on top and sides */
+    /* Banner header: framed 32px on top and sides, height-capped, centered */
     .site-header {
       flex: 0 0 auto;
       line-height: 0;
       padding: var(--frame) var(--frame) 0;
+      text-align: center;
     }
 
     .site-header img {
-      display: block;
-      width: 100%;
-      height: auto;
+      display: inline-block;
+      height: var(--banner-height);
+      width: auto;
+      max-width: 100%;
       border-radius: 8px;
     }
 
