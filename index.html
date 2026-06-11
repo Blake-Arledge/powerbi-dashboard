@@ -7,11 +7,18 @@
   <style>
     :root {
       /* Tweak these to taste */
-      --zoom: 0.6;            /* report zoom level (1 = fit to page) */
       --frame: 32px;          /* consistent border around banner + report */
       --banner-height: 150px; /* banner height (smaller = less vertical space) */
       --buffer-bottom: 0px;   /* space below the report */
       --bg: #1f2c44;          /* page background (frame color) */
+
+      /*
+        IMPORTANT: set these two to EXACTLY match your Power BI canvas
+        size (Format page -> Canvas settings). The report fills the width
+        and scrolls vertically; matching the ratio removes all white bars.
+      */
+      --canvas-w: 1280;       /* Power BI canvas width  */
+      --canvas-h: 1800;       /* Power BI canvas height */
     }
 
     * {
@@ -48,29 +55,27 @@
       border-radius: 8px;
     }
 
-    /* Report area fills the remaining height, framed 32px on the sides */
+    /*
+      Report area: fills the remaining height and scrolls vertically.
+      The iframe spans the full width; its height follows the canvas
+      aspect ratio, so the report is "fit to width" and any overflow
+      scrolls instead of being squeezed to fit on screen.
+    */
     .report-container {
       flex: 1 1 auto;
-      position: relative;
+      min-height: 0;
       margin: var(--frame) var(--frame) var(--buffer-bottom);
-      overflow: hidden;
+      overflow-y: auto;
+      overflow-x: hidden;
       border-radius: 8px;
+      background: var(--bg);
     }
 
-    /*
-      Zoom: the iframe is rendered larger (100% / zoom) and then scaled
-      down so the report content displays at the chosen zoom level while
-      still filling the available area.
-    */
     .report-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: calc(100% / var(--zoom));
-      height: calc(100% / var(--zoom));
+      display: block;
+      width: 100%;
+      aspect-ratio: var(--canvas-w) / var(--canvas-h);
       border: none;
-      transform: scale(var(--zoom));
-      transform-origin: top left;
     }
   </style>
 </head>
