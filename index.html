@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Power BI Dashboard</title>
+  <title>Texas Water Trends Dashboard</title>
   <style>
     :root {
       /* Tweak these to taste */
       --zoom: 0.6;            /* report zoom level */
-      --buffer-top: 32px;     /* space above the report */
-      --buffer-side: 200px;   /* space on left and right */
+      --gap-top: 32px;        /* space between banner and report */
+      --buffer-side: 200px;   /* space on left and right of report */
       --buffer-bottom: 0px;   /* space below the report */
       --bg: #1f2c44;          /* page background (contrast frame) */
     }
@@ -22,20 +22,35 @@
 
     html, body {
       height: 100%;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
       overflow: hidden;
       background: var(--bg);
     }
 
-    /* Report area: wide side frames, top buffer, flush to bottom */
+    /* Banner header, full width across the top */
+    .site-header {
+      flex: 0 0 auto;
+      line-height: 0;
+    }
+
+    .site-header img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* Report area fills the remaining height, inset on the sides */
     .report-container {
-      position: fixed;
-      top: var(--buffer-top);
-      left: var(--buffer-side);
-      width: calc(100vw - 2 * var(--buffer-side));
-      height: calc(100vh - var(--buffer-top) - var(--buffer-bottom));
+      flex: 1 1 auto;
+      position: relative;
+      margin: var(--gap-top) var(--buffer-side) var(--buffer-bottom);
       overflow: hidden;
-      border-top-left-radius: 8px;
-      border-top-right-radius: 8px;
+      border-radius: 8px;
     }
 
     /*
@@ -56,6 +71,9 @@
   </style>
 </head>
 <body>
+  <header class="site-header">
+    <img src="twt-banner.png" alt="Texas Water Trends Dashboard" />
+  </header>
   <div class="report-container">
     <iframe
       title="Power BI Report"
