@@ -8,10 +8,9 @@
     :root {
       /* Tweak these to taste */
       --zoom: 1;              /* report zoom level (1 = fit to page) */
-      --gap-top: 32px;        /* space between banner and report */
-      --buffer-side: 200px;   /* space on left and right of report */
+      --frame: 32px;          /* consistent border around banner + report */
       --buffer-bottom: 0px;   /* space below the report */
-      --bg: #1f2c44;          /* page background (contrast frame) */
+      --bg: #1f2c44;          /* page background (frame color) */
     }
 
     * {
@@ -32,23 +31,25 @@
       background: var(--bg);
     }
 
-    /* Banner header, full width across the top */
+    /* Banner header: framed 32px on top and sides */
     .site-header {
       flex: 0 0 auto;
       line-height: 0;
+      padding: var(--frame) var(--frame) 0;
     }
 
     .site-header img {
       display: block;
       width: 100%;
       height: auto;
+      border-radius: 8px;
     }
 
-    /* Report area fills the remaining height, inset on the sides */
+    /* Report area fills the remaining height, framed 32px on the sides */
     .report-container {
       flex: 1 1 auto;
       position: relative;
-      margin: var(--gap-top) var(--buffer-side) var(--buffer-bottom);
+      margin: var(--frame) var(--frame) var(--buffer-bottom);
       overflow: hidden;
       border-radius: 8px;
     }
